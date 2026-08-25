@@ -1,0 +1,8 @@
+{
+  "endpointUrl": "https://invalid-url-test-123.com",
+  "payload": {
+    "event": "user.created",
+    "userId": "usr_123",
+    "name": "Yeabsira"
+  }
+}
