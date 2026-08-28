@@ -10,7 +10,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Event ID is required" }, { status: 400 });
     }
 
-    // ከዳታቤዝ ላይ ዌብኮክ ክስተቱን መፈለግ
     const event = await db.payloadLog.findUnique({
       where: { id: eventId },
     });
@@ -19,7 +18,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Event not found" }, { status: 404 });
     }
 
-    // ፔይሎዱን እንደገና ወደ BullMQ Queue መክተት
     await webhookQueue.add("dispatch-event", {
       endpointUrl: event.endpointUrl,
       payload: event.payload,
