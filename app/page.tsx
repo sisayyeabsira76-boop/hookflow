@@ -1,4 +1,4 @@
-  'use client';
+ 'use client';
 
 import { useState } from 'react';
 import { RotateCw, Zap, Plus, Globe } from 'lucide-react';
@@ -18,7 +18,22 @@ export default function Dashboard() {
     { id: 'evt_101', endpointUrl: 'https://api.merchant.com/webhooks', status: 'success', createdAt: '10:42:15' },
     { id: 'evt_102', endpointUrl: 'https://billing.internal/hooks', status: 'failed', createdAt: '10:40:02' }
   ]);
-
+ 
+    async function handleReplay(id: string) {
+    try {
+      const response = await fetch('/api/webhooks/replay/${id}', {
+        method: "POST",
+      });
+      
+      if (response.ok) {
+        alert("Webhook replayed successfully!");
+      } else {
+        alert("Failed to replay webhook.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
   const handleAddEndpoint = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newName || !newUrl) return;
@@ -27,15 +42,11 @@ export default function Dashboard() {
     setNewUrl('');
   };
 
-  const handleReplay = (id: string) => {
-    console.log('Replaying event:', id);
-  };
-
   return (
     <div className="min-h-screen bg-[#0a0f1d] text-slate-100 p-8 font-sans">
       <div className="max-w-6xl mx-auto space-y-6">
         
-        {/* Header Section */}
+        
         <div className="flex items-center space-x-3">
           <div className="p-2 bg-blue-600 rounded-lg">
             <Zap className="w-6 h-6 text-white" />
@@ -50,19 +61,19 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Total Events</p>
-            <h3 className="text-2xl font-bold text-white mt-1">1,284,932</h3>
+            <h3 className="text-2xl font-bold text-white mt-1">900,000</h3>
           </div>
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Success Rate</p>
-            <h3 className="text-2xl font-bold text-emerald-400 mt-1">99.8%</h3>
+            <h3 className="text-2xl font-bold text-emerald-400 mt-1">80%</h3>
           </div>
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Failed Dispatches</p>
-            <h3 className="text-2xl font-bold text-rose-400 mt-1">241</h3>
+            <h3 className="text-2xl font-bold text-rose-400 mt-1">200</h3>
           </div>
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Avg Latency</p>
-            <h3 className="text-2xl font-bold text-amber-400 mt-1">42ms</h3>
+            <h3 className="text-2xl font-bold text-amber-400 mt-1">40ms</h3>
           </div>
         </div>
 
@@ -81,11 +92,10 @@ export default function Dashboard() {
             Configured Endpoints
           </button>
         </div>
-
-        {/* Content Section */}
+ 
         {activeTab === 'endpoints' ? (
          <div className="space-y-6">
-            {/* Register New Endpoint Card */}
+           
             <div className="bg-[#111827] border border-slate-800 p-6 rounded-xl space-y-4">
               <h3 className="text-sm font-semibold flex items-center gap-2 text-white">
                 <Plus className="w-4 h-4 text-blue-500" /> Register New Endpoint
@@ -120,7 +130,7 @@ export default function Dashboard() {
               </form>
             </div>
 
-            {/* Active Endpoints List */}
+            
             <div className="bg-[#111827] border border-slate-800 p-6 rounded-xl space-y-4">
               <h3 className="text-sm font-semibold text-white">Active Endpoints ({endpoints.length})</h3>
               <div className="space-y-3">
@@ -142,7 +152,7 @@ export default function Dashboard() {
             </div>
           </div>
         ) : (
-          /* Events Tab */
+          
           <div className="bg-[#111827] border border-slate-800 p-6 rounded-xl space-y-4">
             <h3 className="text-sm font-semibold text-white">Recent Webhook Deliveries</h3>
             <div className="space-y-3">
@@ -151,7 +161,6 @@ export default function Dashboard() {
                 const badgeClass = isSuccess 
                   ? "text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium" 
                   : "text-xs px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 font-medium";
-
                 return (
                   <div key={ev.id} className="flex items-center justify-between p-4 bg-[#0b101d] border border-slate-800 rounded-lg">
                     <div className="space-y-1">
