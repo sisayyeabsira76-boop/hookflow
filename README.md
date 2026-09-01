@@ -18,6 +18,5 @@ HookFlow is an enterprise-grade webhook management and event processing system d
  Getting Started
 
 1. Clone the repository and navigate into the folder:
-   ''`bash
-   git clone [https://github.com/sisayyeabsira76-boop/hookflow.git](https://github.com/sisayyeabsira76-boop/hookflow.git)
-   cd hookflow
+   https://github.com/sisayyeabsira76-boop/hookflow.git
+ cd hookflow
