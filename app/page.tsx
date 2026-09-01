@@ -61,7 +61,7 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Total Events</p>
-            <h3 className="text-2xl font-bold text-white mt-1">900,000</h3>
+            <h3 className="text-2xl font-bold text-white mt-1">280</h3>
           </div>
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Success Rate</p>
@@ -69,7 +69,7 @@ export default function Dashboard() {
           </div>
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Failed Dispatches</p>
-            <h3 className="text-2xl font-bold text-rose-400 mt-1">200</h3>
+            <h3 className="text-2xl font-bold text-rose-400 mt-1">20</h3>
           </div>
           <div className="bg-[#111827] border border-slate-800 p-4 rounded-xl">
             <p className="text-xs text-slate-400">Avg Latency</p>
